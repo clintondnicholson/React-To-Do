@@ -19,7 +19,7 @@ handleSubmit(e) {
   e.preventDefault();
   if (!this.state.newTodoDescription) { return }
   const newTodo = {description: this.state.newTodoDescription, isCompleted: false };
-  this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
+  this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: 't' });
 }
 
 handleChange(e) {
@@ -33,12 +33,29 @@ toggleComplete(index) {
   this.setState({ todos: todos });
 }
 
+deleteTodo(todo) {
+    // const newArr = this.state.todos.filter( todoDescription => todo.deleteTodo !== false);
+    // this.setState({ todos: newArr});
+    // console.log ('newArr');
+
+    const new_todos = this.state.todos.filter(
+      todoDescription => todoDescription.description !== todo.description
+    );
+    this.setState({ todos: new_todos });
+  }
+
   render() {
     return (
       <div className="App">
         <ul>
           { this.state.todos.map( (todo, index) =>
-            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } />
+            <ToDo
+              key={ index }
+              description={ todo.description }
+              isCompleted={ todo.isCompleted }
+              toggleComplete={ () => this.toggleComplete(index) }
+              deleteTodo={ () => this.deleteTodo(todo)}
+            />
           )}
         </ul>
         <form onSubmit={ (e) => this.handleSubmit(e) }>
