@@ -33,15 +33,27 @@ toggleComplete(index) {
   this.setState({ todos: todos });
 }
 
-deleteTodo(todo) {
+deleteTodo(index) {
     // const newArr = this.state.todos.filter( todoDescription => todo.deleteTodo !== false);
     // this.setState({ todos: newArr});
     // console.log ('newArr');
-
-    const new_todos = this.state.todos.filter(
-      todoDescription => todoDescription.description !== todo.description
-    );
-    this.setState({ todos: new_todos });
+    const indexToTakeOut = index
+    function takeOutByIndex(value, index, ar) {
+    }
+    const todos = this.state.todos;
+    // const todo = todos[index];
+    // this.setState({ todos: todos });
+    var newArray = todos.slice(index+1).concat(todos.slice(0,index));
+    // let todos = this.state.todos;
+    //
+    // const newTodos = todos[index] = "";
+    // // const todo = todos[index];
+    // this.setState({ todos: newTodos });
+    //
+    // const new_todos = this.state.todos.filter(
+    //   todoDescription => todoDescription.description !== todo.description
+    // );
+    this.setState({ todos: newArray });
   }
 
   render() {
@@ -54,7 +66,7 @@ deleteTodo(todo) {
               description={ todo.description }
               isCompleted={ todo.isCompleted }
               toggleComplete={ () => this.toggleComplete(index) }
-              deleteTodo={ () => this.deleteTodo(todo)}
+              deleteTodo={ () => this.deleteTodo(index)}
             />
           )}
         </ul>
